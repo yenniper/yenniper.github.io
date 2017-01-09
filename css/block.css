@@ -16,6 +16,9 @@
 		margin: 50px 150px 50px 150px;
 		font-size: 12px;
 	}
+	#logo{
+		height:200px;
+	}
 	.center {
 	display:block;
 	margin: 0px auto;
