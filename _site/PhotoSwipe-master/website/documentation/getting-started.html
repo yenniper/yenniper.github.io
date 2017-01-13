@@ -1,0 +1,513 @@
+<p>First things that you should know before you start:</p>
+
+<ul>
+  <li>PhotoSwipe is not a simple jQuery plugin, at least basic JavaScript knowledge is required to install.</li>
+  <li>PhotoSwipe requires predefined image dimensions (<a href="faq.html#image-size">more about this</a>).</li>
+  <li>If you use PhotoSwipe on non-responsive website – controls will be scaled on mobile (as the whole page is scaled). So you’ll need to implement custom controls (e.g. single large close button in top right corner).</li>
+  <li>All code in the documentation is pure Vanilla JS and supports IE 8 and above. If your website or app uses some JavaScript framework (like jQuery or MooTools) or you don’t need to support old browsers – feel free to simplify the code.</li>
+  <li>Avoid serving big images (larger than 2000x1500px) for mobile, as they will dramatically reduce animation performance and can cause crash (especially on iOS Safari). Possible solutions: <a href="responsive-images.html">serve responsive images</a>, or open image on a separate page, or use libraries that support image tiling (like <a href="http://leafletjs.com/">Leaflet</a>) (<a href="faq.html#mobile-crash">more in FAQ</a>).</li>
+</ul>
+
+<h2 id="a-nameinitializationa-initialization"><a name="initialization"></a> Initialization</h2>
+
+<h3 id="a-nameinit-include-filesastep-1-include-js-and-css-files"><a name="init-include-files"></a>Step 1: include JS and CSS files</h3>
+
+<p>You can find them in <a href="https://github.com/dimsemenov/PhotoSwipe/tree/master/dist">dist/</a> folder of <a href="https://github.com/dimsemenov/PhotoSwipe">GitHub</a> repository. Sass and uncompiled JS files are in folder <a href="https://github.com/dimsemenov/PhotoSwipe/tree/master/src">src/</a>. I recommend using Sass if you’re planning to modify existing styles, as code there is structured and commented.</p>
+
+<p>```html
+<!-- Core CSS file --></p>
+<link rel="stylesheet" href="path/to/photoswipe.css" />
+
+<!-- Skin CSS file (styling of UI - buttons, caption, etc.)
+	 In the folder of skin CSS file there are also:
+	 - .png and .svg icons sprite, 
+	 - preloader.gif (for browsers that do not support CSS animations) -->
+<link rel="stylesheet" href="path/to/default-skin/default-skin.css" />
+
+<!-- Core JS file -->
+<script src="path/to/photoswipe.min.js"></script>
+
+<!-- UI JS file -->
+<script src="path/to/photoswipe-ui-default.min.js"></script>
+
+<p>```</p>
+
+<p>It doesn’t matter how and where will you include JS and CSS files. Code is executed only when you call <code class="highlighter-rouge">new PhotoSwipe()</code>. So feel free to defer loading of files if you don’t need PhotoSwipe to be opened initially.</p>
+
+<p>PhotoSwipe also supports AMD loaders (like RequireJS) and CommonJS, use them like so:</p>
+
+<p>```javascript
+require([ 
+		‘path/to/photoswipe.js’, 
+		‘path/to/photoswipe-ui-default.js’ 
+	], function( PhotoSwipe, PhotoSwipeUI_Default ) {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//  	var gallery = new PhotoSwipe( someElement, PhotoSwipeUI_Default ...
+//  	gallery.init() 
+//  	...
+</code></pre>
+</div>
+
+<p>});
+```</p>
+
+<p>And also, you can install it via Bower (<code class="highlighter-rouge">bower install photoswipe</code>), or <a href="https://www.npmjs.com/package/photoswipe">NPM</a> (<code class="highlighter-rouge">npm install photoswipe</code>).</p>
+
+<h3 id="a-nameinit-add-pswp-to-domastep-2-add-photoswipe-pswp-element-to-dom"><a name="init-add-pswp-to-dom"></a>Step 2: add PhotoSwipe (.pswp) element to DOM</h3>
+
+<p>You can add HTML code dynamically via JS (directly before the initialization), or have it in the page initially (like it’s done on the demo page). This code can be appended anywhere, but ideally before the closing <code class="highlighter-rouge">&lt;/body&gt;</code>. You may reuse it across multiple galleries (as long as you use same UI class).</p>
+
+<p>```html
+<!-- Root element of PhotoSwipe. Must have class pswp. --></p>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+	<!-- Background of PhotoSwipe. 
+		 It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+	<!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+		<!-- Container that holds slides. 
+			PhotoSwipe keeps only 3 of them in the DOM to save memory.
+			Don't modify these 3 pswp__item elements, data is added later on. -->
+		<div class="pswp__container">
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+		</div>
+
+		<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+		<div class="pswp__ui pswp__ui--hidden">
+
+			<div class="pswp__top-bar">
+
+				<!--  Controls are self-explanatory. Order can be changed. -->
+				
+				<div class="pswp__counter"></div>
+
+				<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+				<button class="pswp__button pswp__button--share" title="Share"></button>
+
+				<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+				<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+				<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+				<!-- element will get class pswp__preloader--active when preloader is running -->
+				<div class="pswp__preloader">
+					<div class="pswp__preloader__icn">
+					  <div class="pswp__preloader__cut">
+					    <div class="pswp__preloader__donut"></div>
+					  </div>
+					</div>
+				</div>
+			</div>
+
+	        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+				<div class="pswp__share-tooltip"></div> 
+	        </div>
+
+			<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+			</button>
+			
+			<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+			</button>
+
+			<div class="pswp__caption">
+				<div class="pswp__caption__center"></div>
+			</div>
+
+	    </div>
+
+	</div>
+
+</div>
+
+<p>```</p>
+
+<p>Order of <code class="highlighter-rouge">pswp__bg</code>, <code class="highlighter-rouge">pswp__scroll-wrap</code>, <code class="highlighter-rouge">pswp__container</code> and <code class="highlighter-rouge">pswp__item</code> elements should not be changed.</p>
+
+<p>You might ask, why PhotoSwipe doesn’t add this code automatically via JS, reason is simple – just to save file size, in case if you need some modification of layout.</p>
+
+<h3 id="step-3-initialize">Step 3: initialize</h3>
+
+<p>Execute <code class="highlighter-rouge">PhotoSwipe</code> constructor. It accepts 4 arguments:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">.pswp</code> element from step 2 (it must be added to DOM).</li>
+  <li>PhotoSwipe UI class. If you included default <code class="highlighter-rouge">photoswipe-ui-default.js</code>, class will be <code class="highlighter-rouge">PhotoSwipeUI_Default</code>. Can be <code class="highlighter-rouge">false</code>.</li>
+  <li>Array with objects (slides).</li>
+  <li><a href="options.html">Options</a>.</li>
+</ol>
+
+<p>```javascript
+var pswpElement = document.querySelectorAll(‘.pswp’)[0];</p>
+
+<p>// build items array
+var items = [
+	{
+		src: ‘https://placekitten.com/600/400’,
+		w: 600,
+		h: 400
+	},
+	{
+		src: ‘https://placekitten.com/1200/900’,
+		w: 1200,
+		h: 900
+	}
+];</p>
+
+<p>// define options (if needed)
+var options = {
+	// optionName: ‘option value’
+	// for example:
+	index: 0 // start at first slide
+};</p>
+
+<p>// Initializes and opens PhotoSwipe
+var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+gallery.init();
+```</p>
+
+<p>At the end you should get something like this:</p>
+
+<div class="codepen-embed">
+	<p data-height="600" data-theme-id="10447" data-slug-hash="gbadPv" data-default-tab="result" data-user="dimsemenov" class="codepen">
+		<a href="http://codepen.io/dimsemenov/pen/gbadPv/" target="_blank"><strong>View example on CodePen &rarr;</strong></a>
+	</p>
+	<!-- <script async src="//assets.codepen.io/assets/embed/ei.js"></script> -->
+</div>
+
+<h2 id="a-namecreating-slide-objects-arraya-creating-an-array-of-slide-objects"><a name="creating-slide-objects-array"></a> Creating an Array of Slide Objects</h2>
+
+<p>Each object in the array should contain data about slide, it can be anything that you wish to display in PhotoSwipe - path to image, caption string, number of shares, comments, etc.</p>
+
+<p>By default PhotoSwipe uses just 5 properties: <code class="highlighter-rouge">src</code> (path to image), <code class="highlighter-rouge">w</code> (image width), <code class="highlighter-rouge">h</code> (image height), <code class="highlighter-rouge">msrc</code> (path to small image placeholder, large image will be loaded on top), <code class="highlighter-rouge">html</code> (custom HTML, <a href="custom-html-in-slides.html">more about it</a>).</p>
+
+<p>During the navigation, PhotoSwipe adds its own properties to this object (like <code class="highlighter-rouge">minZoom</code> or <code class="highlighter-rouge">loaded</code>).</p>
+
+<p>```javascript
+var slides = [</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// slide 1
+{
+
+	src: 'path/to/image1.jpg', // path to image
+	w: 1024, // image width
+	h: 768, // image height
+
+	msrc: 'path/to/small-image.jpg', // small image placeholder,
+					// main (large) image loads on top of it,
+					// if you skip this parameter - grey rectangle will be displayed,
+					// try to define this property only when small image was loaded before
+
+
+
+	title: 'Image Caption'  // used by Default PhotoSwipe UI
+							// if you skip it, there won't be any caption
+							
+
+	// You may add more properties here and use them.
+	// For example, demo gallery uses "author" property, which is used in the caption.
+	// author: 'John Doe'
+	
+},
+
+// slide 2
+{
+	src: 'path/to/image2.jpg', 
+	w: 600, 
+	h: 600
+
+	// etc.
+}
+
+// etc.
+</code></pre>
+</div>
+
+<p>];
+```</p>
+
+<p>You may dynamically define slide object properties directly before PhotoSwipe reads them, use <code class="highlighter-rouge">gettingData</code> event (more info in <a href="api.html">API section of docs</a>). For example, this technique can be used to <a href="responsive-images.html">serve different images</a> for different screen sizes.</p>
+
+<h2 id="a-classanchor-namedom-to-slide-objectsa-how-to-build-an-array-of-slides-from-a-list-of-links"><a class="anchor" name="dom-to-slide-objects"></a> How to build an array of slides from a list of links</h2>
+
+<p>Let’s assume that you have a list of links/thumbnails that look like this (<a href="seo.html">more info about markup of gallery</a>):</p>
+
+<p>```html</p>
+<div class="my-gallery" itemscope="" itemtype="http://schema.org/ImageGallery">
+
+	<figure itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="large-image.jpg" itemprop="contentUrl" data-size="600x400">
+		    <img src="small-image.jpg" itemprop="thumbnail" alt="Image description" />
+		</a>
+		<figcaption itemprop="caption description">Image caption</figcaption>
+	</figure>
+
+	<figure itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="large-image.jpg" itemprop="contentUrl" data-size="600x400">
+		    <img src="small-image.jpg" itemprop="thumbnail" alt="Image description" />
+		</a>
+		<figcaption itemprop="caption description">Image caption</figcaption>
+	</figure>
+
+
+</div>
+<p>```</p>
+
+<p>… and you want click on the thumbnail to open PhotoSwipe with large image (like it’s done on a demo page). All you need to do is:</p>
+
+<ol>
+  <li>Bind click event to links/thumbnails.</li>
+  <li>After user clicked on thumbnail, find its index.</li>
+  <li>Create an array of slide objects from DOM elements – loop through all links and retrieve <code class="highlighter-rouge">href</code> attribute (large image url), <code class="highlighter-rouge">data-size</code> attribute (its size), <code class="highlighter-rouge">src</code> of thumbnail, and contents of caption.</li>
+</ol>
+
+<p>PhotoSwipe doesn’t really care how will you do this. If you use frameworks like jQuery or MooTools, or if you don’t need to support IE8, code can be simplified dramatically.</p>
+
+<p>Here is pure Vanilla JS implementation with IE8 support:</p>
+
+<p>```javascript
+var initPhotoSwipeFromDOM = function(gallerySelector) {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// parse slide data (url, title, size ...) from DOM elements 
+// (children of gallerySelector)
+var parseThumbnailElements = function(el) {
+	var thumbElements = el.childNodes,
+		numNodes = thumbElements.length,
+		items = [],
+		figureEl,
+		linkEl,
+		size,
+		item;
+
+	for(var i = 0; i &lt; numNodes; i++) {
+
+		figureEl = thumbElements[i]; // &lt;figure&gt; element
+
+		// include only element nodes 
+		if(figureEl.nodeType !== 1) {
+			continue;
+		}
+
+		linkEl = figureEl.children[0]; // &lt;a&gt; element
+		
+		size = linkEl.getAttribute('data-size').split('x');
+
+		// create slide object
+		item = {
+			src: linkEl.getAttribute('href'),
+			w: parseInt(size[0], 10),
+			h: parseInt(size[1], 10)
+		};
+
+		
+
+		if(figureEl.children.length &gt; 1) {
+			// &lt;figcaption&gt; content
+			item.title = figureEl.children[1].innerHTML; 
+		}
+ 
+		if(linkEl.children.length &gt; 0) {
+			// &lt;img&gt; thumbnail element, retrieving thumbnail url
+			item.msrc = linkEl.children[0].getAttribute('src');
+		} 
+	   
+		item.el = figureEl; // save link to element for getThumbBoundsFn
+		items.push(item);
+	}
+
+	return items;
+};
+
+// find nearest parent element
+var closest = function closest(el, fn) {
+	return el &amp;&amp; ( fn(el) ? el : closest(el.parentNode, fn) );
+};
+
+// triggers when user clicks on thumbnail
+var onThumbnailsClick = function(e) {
+	e = e || window.event;
+	e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+	var eTarget = e.target || e.srcElement;
+
+	// find root element of slide
+	var clickedListItem = closest(eTarget, function(el) {
+		return (el.tagName &amp;&amp; el.tagName.toUpperCase() === 'FIGURE');
+	});
+
+	if(!clickedListItem) {
+		return;
+	}
+
+	// find index of clicked item by looping through all child nodes
+	// alternatively, you may define index via data- attribute
+	var clickedGallery = clickedListItem.parentNode,
+		childNodes = clickedListItem.parentNode.childNodes,
+		numChildNodes = childNodes.length,
+		nodeIndex = 0,
+		index;
+
+	for (var i = 0; i &lt; numChildNodes; i++) {
+		if(childNodes[i].nodeType !== 1) { 
+			continue; 
+		}
+
+		if(childNodes[i] === clickedListItem) {
+			index = nodeIndex;
+			break;
+		}
+		nodeIndex++;
+	}
+
+
+
+	if(index &gt;= 0) {
+		// open PhotoSwipe if valid index found
+		openPhotoSwipe( index, clickedGallery );
+	}
+	return false;
+};
+
+// parse picture index and gallery index from URL (#&amp;pid=1&amp;gid=2)
+var photoswipeParseHash = function() {
+	var hash = window.location.hash.substring(1),
+	params = {};
+
+	if(hash.length &lt; 5) {
+		return params;
+	}
+
+	var vars = hash.split('&amp;');
+	for (var i = 0; i &lt; vars.length; i++) {
+		if(!vars[i]) {
+			continue;
+		}
+		var pair = vars[i].split('=');  
+		if(pair.length &lt; 2) {
+			continue;
+		}           
+		params[pair[0]] = pair[1];
+	}
+
+	if(params.gid) {
+		params.gid = parseInt(params.gid, 10);
+	}
+
+	return params;
+};
+
+var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+	var pswpElement = document.querySelectorAll('.pswp')[0],
+		gallery,
+		options,
+		items;
+
+	items = parseThumbnailElements(galleryElement);
+
+	// define options (if needed)
+	options = {
+
+		// define gallery index (for URL)
+		galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+		getThumbBoundsFn: function(index) {
+			// See Options -&gt; getThumbBoundsFn section of documentation for more info
+			var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+				pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+				rect = thumbnail.getBoundingClientRect(); 
+
+			return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+		}
+
+	};
+
+	// PhotoSwipe opened from URL
+	if(fromURL) {
+    	if(options.galleryPIDs) {
+    		// parse real index when custom PIDs are used 
+    		// http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+    		for(var j = 0; j &lt; items.length; j++) {
+    			if(items[j].pid == index) {
+    				options.index = j;
+    				break;
+    			}
+    		}
+	    } else {
+	    	// in URL indexes start from 1
+	    	options.index = parseInt(index, 10) - 1;
+	    }
+    } else {
+    	options.index = parseInt(index, 10);
+    }
+
+    // exit if index not found
+    if( isNaN(options.index) ) {
+    	return;
+    }
+
+	if(disableAnimation) {
+		options.showAnimationDuration = 0;
+	}
+
+	// Pass data to PhotoSwipe and initialize it
+	gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+	gallery.init();
+};
+
+// loop through all gallery elements and bind events
+var galleryElements = document.querySelectorAll( gallerySelector );
+
+for(var i = 0, l = galleryElements.length; i &lt; l; i++) {
+	galleryElements[i].setAttribute('data-pswp-uid', i+1);
+	galleryElements[i].onclick = onThumbnailsClick;
+}
+
+// Parse URL and open gallery if it contains #&amp;pid=3&amp;gid=1
+var hashData = photoswipeParseHash();
+if(hashData.pid &amp;&amp; hashData.gid) {
+	openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
+} };
+</code></pre>
+</div>
+
+<p>// execute above function
+initPhotoSwipeFromDOM(‘.my-gallery’);
+```</p>
+
+<p>Example on CodePen (<code class="highlighter-rouge">focus</code> &amp; <code class="highlighter-rouge">history</code> options are disabled due to embed issues):</p>
+
+<div class="codepen-embed">
+	<p data-height="600" data-theme-id="10447" data-slug-hash="ZYbPJM" data-default-tab="result" data-user="dimsemenov" class="codepen">
+		<a href="http://codepen.io/dimsemenov/pen/ZYbPJM/" target="_blank"><strong>View example on CodePen &rarr;</strong></a>
+	</p>
+</div>
+
+<p>Tip: you may download example from CodePen to play with it locally (<code class="highlighter-rouge">Edit on CodePen</code> -&gt; <code class="highlighter-rouge">Share</code> -&gt; <code class="highlighter-rouge">Export .zip</code>).</p>
+
+<ul>
+  <li>If you’re using markup that differs from this example, you’ll need to edit function <code class="highlighter-rouge">parseThumbnailElements</code>.</li>
+  <li>If you’re not experienced in pure JavaScript and don’t know how to parse DOM, refer to <a href="http://quirksmode.org/dom/core/#gettingelements">QuirksMode</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element.getElementsByTagName">documentation on MDN</a>.</li>
+  <li>
+    <p>Note that IE8 does not support HTML5 <code class="highlighter-rouge">&lt;figure&gt;</code> and <code class="highlighter-rouge">&lt;figcaption&gt;</code> elements, so you need to include <a href="https://github.com/aFarkas/html5shiv">html5shiv</a> in <code class="highlighter-rouge">&lt;head&gt;</code> section (<a href="http://cdnjs.com/libraries/html5shiv/">cdnjs hosted version</a> is used in example):</p>
+
+    <p><code class="highlighter-rouge">html
+  &lt;!--[if lt IE 9]&gt;
+      &lt;script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"&gt;&lt;/script&gt;
+  &lt;![endif]--&gt;
+ </code></p>
+  </li>
+</ul>
+
+<h2 id="about">About</h2>
+
+<p>Please <a href="faq.html#keep-updated">keep script updated</a>, report bugs through <a href="https://github.com/dimsemenov/PhotoSwipe">GitHub</a>, suggest features on <a href="https://photoswipe.uservoice.com/forums/275302-feature-requests-ideas">UserVoice</a> and ask questions through <a href="http://stackoverflow.com/questions/ask?tags=javascript,photoswipe">StackOverflow</a>.</p>
+
+<p>Know how this page can be improved? Found a typo? <a href="https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/getting-started.md">Suggest an edit!</a></p>
+
+<iframe src="http://ghbtns.com/github-btn.html?user=dimsemenov&amp;repo=photoswipe&amp;type=watch&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="155" height="30" style=""></iframe>
+

@@ -1,0 +1,370 @@
+<p>Options are added in key-value pairs and passed as an argument to <code class="highlighter-rouge">PhotoSwipe</code> constructor, e.g.:</p>
+
+<p>```javascript
+var options = {
+	index: 3,
+	escKey: false,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// ui option
+timeToIdle: 4000 }; var gallery = new PhotoSwipe( someElement, PhotoSwipeUI_Default, someItems, options); gallery.init();
+</code></pre>
+</div>
+
+<p>// Note that options object is cloned during the initialization.
+// But you can access it via <code class="highlighter-rouge">gallery.options</code>.
+// For example, to dynamically change <code class="highlighter-rouge">escKey</code>:
+gallery.options.escKey = false;</p>
+
+<p>// <code class="highlighter-rouge">options.escKey = false</code> will not work</p>
+
+<p>```</p>
+
+<h2 id="core">Core</h2>
+
+<h3 id="index-code-classdefaultintegercode-code-classdefault0code"><code class="highlighter-rouge">index</code> <code class="default">integer</code> <code class="default">0</code></h3>
+
+<p>Start slide index. <code class="highlighter-rouge">0</code> is the first slide. Must be integer, not a string.</p>
+
+<h3 id="getthumbboundsfn-code-classdefaultfunctioncode-code-classdefaultundefinedcode"><code class="highlighter-rouge">getThumbBoundsFn</code> <code class="default">function</code> <code class="default">undefined</code></h3>
+
+<p>Function should return an object with coordinates from which initial zoom-in animation will start (or zoom-out animation will end).</p>
+
+<p>Object should contain three properties: <code class="highlighter-rouge">x</code> (X position, relative to document), <code class="highlighter-rouge">y</code> (Y position, relative to document), <code class="highlighter-rouge">w</code> (width of the element). Height will be calculated automatically based on size of large image. For example if you return <code class="highlighter-rouge"><span class="p">{</span><span class="err">x:0,y:0,w:50</span><span class="p">}</span></code> zoom animation will start in top left corner of your page.</p>
+
+<p>Function has one argument - <code class="highlighter-rouge">index</code> of the item that is opening or closing.</p>
+
+<p>In non-modal mode, the template’s position relative to the viewport should be subtracted from <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code>. Look at <a href="faq.html#inline-gallery">the FAQ</a> for more information.</p>
+
+<p>Example that calculates position of thumbnail:</p>
+
+<p>```javascript
+getThumbBoundsFn: function(index) {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// find thumbnail element
+var thumbnail = document.querySelectorAll('.my-gallery-thumbnails')[index];
+
+// get window scroll Y
+var pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
+// optionally get horizontal scroll
+
+// get position of element relative to viewport
+var rect = thumbnail.getBoundingClientRect(); 
+
+// w = width
+return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+
+
+// Good guide on how to get element coordinates:
+// http://javascript.info/tutorial/coordinates } ```
+</code></pre>
+</div>
+
+<p>If dimensions of your small thumbnail don’t match dimensions of large image, consider enabling zoom+fade transition. You can do this by adding option <code class="highlighter-rouge">showHideOpacity:true</code> (try adding it to <a href="http://codepen.io/dimsemenov/pen/ZYbPJM">above CodePen</a> to test how it looks). Or disable transition entirely by adding <code class="highlighter-rouge">hideAnimationDuration:0, showAnimationDuration:0</code>. <a href="faq.html#different-thumbnail-dimensions">More info about this in FAQ</a>.</p>
+
+<p>If you want to “hide” small thumbnail during the animation use <code class="highlighter-rouge">opacity:0</code>, not <code class="highlighter-rouge">visibility:hidden</code> or <code class="highlighter-rouge">display:none</code>. Don’t force Paint and Layout at the beginning of the animation to avoid lag.</p>
+
+<h3 id="showhideopacity-code-classdefaultbooleancode-code-classdefaultfalsecode"><code class="highlighter-rouge">showHideOpacity</code> <code class="default">boolean</code> <code class="default">false</code></h3>
+
+<p>If set to <code class="highlighter-rouge">false</code>: background <code class="highlighter-rouge">opacity</code> and image <code class="highlighter-rouge">scale</code> will be animated (image opacity is always 1). 
+If set to <code class="highlighter-rouge">true</code>: root PhotoSwipe element <code class="highlighter-rouge">opacity</code> and image <code class="highlighter-rouge">scale</code> will be animated.</p>
+
+<p>To enable just <code class="highlighter-rouge">opacity</code> transition (without <code class="highlighter-rouge">scale</code>), do not define <code class="highlighter-rouge">getThumbBoundsFn</code> option.</p>
+
+<h3 id="showanimationduration-code-classdefaultintegercode-code-classdefault333code"><code class="highlighter-rouge">showAnimationDuration</code> <code class="default">integer</code> <code class="default">333</code></h3>
+
+<p>Initial zoom-in transition duration in milliseconds. Set to <code class="highlighter-rouge">0</code> to disable.
+Besides this JS option, you need also to change transition duration in PhotoSwipe CSS file:</p>
+
+<p><code class="highlighter-rouge">css
+.pswp--animate_opacity,
+.pswp__bg,
+.pswp__caption,
+.pswp__top-bar,
+.pswp--has_mouse .pswp__button--arrow--left,
+.pswp--has_mouse .pswp__button--arrow--right{
+	-webkit-transition: opacity 333ms cubic-bezier(.4,0,.22,1);
+	transition: opacity 333ms cubic-bezier(.4,0,.22,1);
+}
+</code></p>
+
+<p>If you’re using Sass, you just need to change transition-duration variables in <a href="https://github.com/dimsemenov/PhotoSwipe/blob/master/src/css/_main-settings.scss">_main-settings.scss</a>.</p>
+
+<h3 id="hideanimationduration-code-classdefaultintegercode-code-classdefault333code"><code class="highlighter-rouge">hideAnimationDuration</code> <code class="default">integer</code> <code class="default">333</code></h3>
+
+<p>The same as the previous option, just for closing (zoom-out) transition. After PhotoSwipe is opened <code class="highlighter-rouge">pswp--open</code> class will be added to the root element, you may use it to apply different transition duration in CSS.</p>
+
+<h3 id="bgopacity-code-classdefaultnumbercode-code-classdefault1code"><code class="highlighter-rouge">bgOpacity</code> <code class="default">number</code> <code class="default">1</code></h3>
+
+<p>Background (<code class="highlighter-rouge">.pswp__bg</code>) opacity. Should be a number from 0 to 1, e.g. <code class="highlighter-rouge">0.7</code>. This style is defined via JS, not via CSS, as this value is used for a few gesture-based transitions.</p>
+
+<h3 id="spacing-code-classdefaultnumbercode-code-classdefault012code"><code class="highlighter-rouge">spacing</code> <code class="default">number</code> <code class="default">0.12</code></h3>
+
+<p>Spacing ratio between slides. For example, <code class="highlighter-rouge">0.12</code> will render as a 12% of sliding viewport width (rounded).</p>
+
+<h3 id="allowpantonext-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">allowPanToNext</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Allow swipe navigation to next/prev item when current item is zoomed. Option is always <code class="highlighter-rouge">false</code> on devices that don’t have hardware touch support.</p>
+
+<h3 id="maxspreadzoom-code-classdefaultnumbercode-code-classdefault2code"><code class="highlighter-rouge">maxSpreadZoom</code> <code class="default">number</code> <code class="default">2</code></h3>
+
+<p>Maximum zoom level when performing spread (zoom) gesture. <code class="highlighter-rouge">2</code> means that image can be zoomed 2x from original size. Try to avoid huge values here, as too big image may cause memory issues on mobile (especially on iOS).</p>
+
+<h3 id="getdoubletapzoom-code-classdefaultfunctioncode"><code class="highlighter-rouge">getDoubleTapZoom</code> <code class="default">function</code></h3>
+
+<p>Function should return zoom level to which image will be zoomed after double-tap gesture, or when user clicks on zoom icon, or mouse-click on image itself. If you return <code class="highlighter-rouge">1</code> image will be zoomed to its original size.</p>
+
+<p>Default value:</p>
+
+<p>```javascript
+getDoubleTapZoom: function(isMouseClick, item) {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// isMouseClick          - true if mouse, false if double-tap
+// item                  - slide object that is zoomed, usually current
+// item.initialZoomLevel - initial scale ratio of image
+// 						   e.g. if viewport is 700px and image is 1400px,
+// 						   		initialZoomLevel will be 0.5
+
+if(isMouseClick) {
+
+	// is mouse click on image or zoom icon
+	
+	// zoom to original
+	return 1;
+
+	// e.g. for 1400px image:
+	// 0.5 - zooms to 700px
+	// 2   - zooms to 2800px
+	
+} else {
+
+	// is double-tap
+	
+	// zoom to original if initial zoom is less than 0.7x,
+	// otherwise to 1.5x, to make sure that double-tap gesture always zooms image
+	return item.initialZoomLevel &lt; 0.7 ? 1 : 1.5;
+} } ```
+</code></pre>
+</div>
+
+<p>Function is called each time zoom-in animation is initiated. So feel free to return different values for different images based on their size or screen DPI.</p>
+
+<h3 id="loop-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">loop</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Loop slides when using swipe gesture. If set to <code class="highlighter-rouge">true</code> you’ll be able to swipe from last to first image. Option is always <code class="highlighter-rouge">false</code> when there are less than 3 slides.</p>
+
+<p>This option has no relation to arrows navigation. Arrows loop is turned on permanently. You can modify this behavior by making custom UI.</p>
+
+<h3 id="pinchtoclose-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">pinchToClose</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Pinch to close gallery gesture. The gallery’s background will gradually fade out as the user zooms out. When the gesture is complete, the gallery will close.</p>
+
+<h3 id="closeonscroll-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">closeOnScroll</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Close gallery on page scroll. Option works just for devices without hardware touch support.</p>
+
+<h3 id="closeonverticaldrag-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">closeOnVerticalDrag</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Close gallery when dragging vertically and when image is not zoomed. Always <code class="highlighter-rouge">false</code> when mouse is used.</p>
+
+<h3 id="mouseused-code-classdefaultbooleancode-code-classdefaultfalsecode"><code class="highlighter-rouge">mouseUsed</code> <code class="default">boolean</code> <code class="default">false</code></h3>
+
+<p>Option allows you to predefine if mouse was used or not. Some PhotoSwipe feature depend on it, for example default UI left/right arrows will be displayed only after mouse is used. If set to <code class="highlighter-rouge">false</code>, PhotoSwipe will start detecting when mouse is used by itself, <code class="highlighter-rouge">mouseUsed</code> event triggers when mouse is found.</p>
+
+<h3 id="esckey-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">escKey</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p><code class="highlighter-rouge">esc</code> keyboard key to close PhotoSwipe. Option can be changed dynamically (<code class="highlighter-rouge">yourPhotoSwipeInstance.options.escKey = false;</code>).</p>
+
+<h3 id="arrowkeys-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">arrowKeys</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Keyboard left or right arrow key navigation. Option can be changed dynamically (<code class="highlighter-rouge">yourPhotoSwipeInstance.options.arrowKeys = false;</code>).</p>
+
+<h3 id="history-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">history</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>If set to <code class="highlighter-rouge">false</code> disables history module (back button to close gallery, unique URL for each slide). You can also just exclude <code class="highlighter-rouge">history.js</code> module from your build.</p>
+
+<h3 id="galleryuid-code-classdefaultintegercode-code-classdefault1code"><code class="highlighter-rouge">galleryUID</code> <code class="default">integer</code> <code class="default">1</code></h3>
+
+<p>Gallery unique ID. Used by History module when forming URL. For example, second picture of gallery with UID 1 will have URL: <code class="highlighter-rouge">http://example.com/#&amp;gid=1&amp;pid=2</code>.</p>
+
+<h3 id="a-namegallerypidsa-gallerypids-code-classdefaultbooleancode-code-classdefaultfalsecode"><a name="galleryPIDs"></a> <code class="highlighter-rouge">galleryPIDs</code> <code class="default">boolean</code> <code class="default">false</code></h3>
+
+<p>Enables custom IDs for each slide object that are used when forming URL. If option set set to <code class="highlighter-rouge">true</code>, slide objects must have <code class="highlighter-rouge">pid</code> (picture identifier) property that can be a string or an integer. For example:</p>
+
+<p>```js
+var slides = [
+	{
+		src: ‘path/to/1.jpg’,
+		w:500,
+		h:400,
+		pid: ‘image-one’
+	},
+	{
+		src: ‘path/to/2.jpg’,
+		w:300,
+		h:700,
+		pid: ‘image-two’
+	},</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>...  ]; ```
+</code></pre>
+</div>
+
+<p>… second slide will have URL <code class="highlighter-rouge">http://example.com/#&amp;gid=1&amp;pid=image-two</code>.</p>
+
+<p>Read more about how to implement custom PID in <a href="faq.html#custom-pid-in-url">the FAQ section</a>.</p>
+
+<h3 id="errormsg-code-classdefaultstringcode"><code class="highlighter-rouge">errorMsg</code> <code class="default">string</code></h3>
+
+<p>Error message when image was not loaded. <code class="highlighter-rouge">%url%</code> will be replaced by URL of image.</p>
+
+<p>Default value:</p>
+
+<p>```html</p>
+<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>
+<p>```</p>
+
+<h3 id="preload-code-classdefaultarraycode-code-classdefault11code"><code class="highlighter-rouge">preload</code> <code class="default">array</code> <code class="default">[1,1]</code></h3>
+
+<p>Lazy loading of nearby slides based on direction of movement. Should be an array with two integers, first one - number of items to preload before current image, second one - after the current image. E.g. if you set it to [1,3], it’ll load 1 image before the current, and 3 images after current. Values can not be less than 1.</p>
+
+<h3 id="mainclass-code-classdefaultstringcode-code-classdefaultundefinedcode"><code class="highlighter-rouge">mainClass</code> <code class="default">string</code> <code class="default">undefined</code></h3>
+
+<p>String with name of class that will be added to root element of PhotoSwipe (<code class="highlighter-rouge">.pswp</code>). Can contain multiple classes separated by space.</p>
+
+<h3 id="getnumitemsfn-code-classdefaultfunctioncode"><code class="highlighter-rouge">getNumItemsFn</code> <code class="default">function</code></h3>
+
+<p>Function that should return total number of items in gallery. By default it returns length of slides array. Don’t put very complex code here, function is executed very often.</p>
+
+<h3 id="focus-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">focus</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Will set focus on PhotoSwipe element after it’s open.</p>
+
+<h3 id="isclickableelement-code-classdefaultfunctioncode"><code class="highlighter-rouge">isClickableElement</code> <code class="default">function</code></h3>
+
+<p>Default value:</p>
+
+<p><code class="highlighter-rouge">javascript
+isClickableElement: function(el) {
+	return el.tagName === 'A';
+}
+</code></p>
+
+<p>Function should check if the element (<code class="highlighter-rouge">el</code>) is clickable. If it is – PhotoSwipe will not call <code class="highlighter-rouge">preventDefault</code> and <code class="highlighter-rouge">click</code> event will pass through. Function should be as light is possible, as it’s executed multiple times on drag start and drag release.</p>
+
+<h3 id="modal-code-classdefaultbooleancode-code-classdefaulttruecode"><code class="highlighter-rouge">modal</code> <code class="default">boolean</code> <code class="default">true</code></h3>
+
+<p>Controls whether PhotoSwipe should expand to take up the entire viewport. If false, the PhotoSwipe element will take the size of the positioned parent of the template. Take a look at <a href="faq.html#inline-gallery">the FAQ</a> for more information.</p>
+
+<h2 id="default-ui-options">Default UI Options</h2>
+
+<p>Options for <code class="highlighter-rouge">PhotoSwipeUI_Default</code> (<code class="highlighter-rouge">dist/ui/photoswipe-ui-default.js</code>) are added the same way and to the same object as core options.</p>
+
+<p>```javascript
+// Size of top &amp; bottom bars in pixels,
+// “bottom” parameter can be ‘auto’ (will calculate height of caption)
+// option applies only when mouse is used, 
+// or width of screen is more than 1200px
+// 
+// (Also refer to <code class="highlighter-rouge">parseVerticalMargin</code> event)
+barsSize: {top:44, bottom:’auto’},</p>
+
+<p>// Adds class pswp__ui–idle to pswp__ui element when mouse isn’t moving for 4000ms
+timeToIdle: 4000,</p>
+
+<p>// Same as above, but this timer applies when mouse leaves the window
+timeToIdleOutside: 1000,</p>
+
+<p>// Delay until loading indicator is displayed
+loadingIndicatorDelay: 1000,</p>
+
+<p>// Function builds caption markup
+addCaptionHTMLFn: function(item, captionEl, isFake) {
+	// item      - slide object
+	// captionEl - caption DOM element
+	// isFake    - true when content is added to fake caption container
+	// 			   (used to get size of next or previous caption)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if(!item.title) {
+	captionEl.children[0].innerHTML = '';
+	return false;
+}
+captionEl.children[0].innerHTML = item.title;
+return true; },
+</code></pre>
+</div>
+
+<p>// Buttons/elements
+closeEl:true,
+captionEl: true,
+fullscreenEl: true,
+zoomEl: true,
+shareEl: true,
+counterEl: true,
+arrowEl: true,
+preloaderEl: true,</p>
+
+<p>// Tap on sliding area should close gallery
+tapToClose: false,</p>
+
+<p>// Tap should toggle visibility of controls
+tapToToggleControls: true,</p>
+
+<p>// Mouse click on image should close the gallery,
+// only when image is smaller than size of the viewport
+clickToCloseNonZoomable: true,</p>
+
+<p>// Element classes click on which should close the PhotoSwipe.
+// In HTML markup, class should always start with “pswp__”, e.g.: “pswp__item”, “pswp__caption”.
+// 
+// “pswp__ui–over-close” class will be added to root element of UI when mouse is over one of these elements
+// By default it’s used to highlight the close button.
+closeElClasses: [‘item’, ‘caption’, ‘zoom-wrap’, ‘ui’, ‘top-bar’],</p>
+
+<p>// Separator for “1 of X” counter
+indexIndicatorSep: ‘ / ‘,</p>
+
+<p>// Share buttons
+// 
+// Available variables for URL:
+// {{url}}             - url to current page
+// {{text}}            - title
+// {{image_url}}       - encoded image url
+// {{raw_image_url}}   - raw image url
+shareButtons: [
+	{id:’facebook’, label:’Share on Facebook’, url:’https://www.facebook.com/sharer/sharer.php?u={{url}}’},
+	{id:’twitter’, label:’Tweet’, url:’https://twitter.com/intent/tweet?text={{text}}&amp;url={{url}}’},
+	{id:’pinterest’, label:’Pin it’, url:’http://www.pinterest.com/pin/create/button/?url={{url}}&amp;media={{image_url}}&amp;description={{text}}’},
+	{id:’download’, label:’Download image’, url:’{{raw_image_url}}’, download:true}
+],</p>
+
+<p>// Next 3 functions return data for share links
+// 
+// functions are triggered after click on button that opens share modal,
+// which means that data should be about current (active) slide
+getImageURLForShare: function( shareButtonData ) {
+	// <code class="highlighter-rouge">shareButtonData</code> - object from shareButtons array
+	// 
+	// <code class="highlighter-rouge">pswp</code> is the gallery instance object,
+	// you should define it by yourself
+	// 
+	return pswp.currItem.src || ‘’;
+},
+getPageURLForShare: function( shareButtonData ) {
+	return window.location.href;
+},
+getTextForShare: function( shareButtonData ) {
+	return pswp.currItem.title || ‘’;
+},</p>
+
+<p>// Parse output of share links
+parseShareButtonOut: function(shareButtonData, shareButtonOut) {
+	// <code class="highlighter-rouge">shareButtonData</code> - object from shareButtons array
+	// <code class="highlighter-rouge">shareButtonOut</code> - raw string of share link element
+	return shareButtonOut;
+}
+```</p>
+
+<p>Know how this page can be improved? Found a typo? <a href="https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/responsive-images.md">Suggest an edit!</a></p>
+
+<iframe src="http://ghbtns.com/github-btn.html?user=dimsemenov&amp;repo=photoswipe&amp;type=watch&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="155" height="30" style=""></iframe>
+

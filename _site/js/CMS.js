@@ -32,8 +32,38 @@
 function imagePop(image_name,image_number) {
 var image_test;
 for (var i = 1; i <= image_number; i++) {
-	image_test = '<img class="thumb" src="/images/valentines/'+image_name+'-valentines/'+image_name+'-valentine'+i+'.jpg" alt="'+image_name+'_valentines">';
+	image_test = '<a class="fancybox" href="'+'/images/valentines/'+image_name+'-valentines/'+image_name+'-valentine'+i+'.jpg"'+'" data-fancybox-group="gallery"><img class="thumb" src="/images/valentines/'+image_name+'-valentines/'+image_name+'-valentine'+i+'.jpg" alt="'+image_name+'_valentines"></a>';
 	$(".vtines").append(image_test);
 };
 };
 
+//-------****** Fancy Box ******-------//
+$(document).ready(function() {
+			/*
+			 *  Simple image gallery. Uses default settings
+			 */
+
+			$('.fancybox').fancybox();
+
+			$("#fancybox-manual-c").click(function() {
+				$.fancybox.open([
+					{
+						href : '1_b.jpg',
+						title : 'My title'
+					}, {
+						href : '2_b.jpg',
+						title : '2nd title'
+					}, {
+						href : '3_b.jpg'
+					}
+				], {
+					helpers : {
+						thumbs : {
+							width: 75,
+							height: 50
+						}
+					}
+				});
+			});
+
+		});
