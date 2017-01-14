@@ -56,8 +56,8 @@
     	.fancybox({
 	        padding    : 0,
 	        margin     : 5,
-	        nextEffect : 'fade',
-	        prevEffect : 'none',
+	        nextEffect : 'elastic',
+	        prevEffect : 'elastic',
 	        autoCenter : false,
 	        afterLoad  : function () {
             			$.extend(this, {
