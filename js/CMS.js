@@ -73,3 +73,19 @@
 			});
 
 		});
+//-------****** Swipe to Change ******-------//
+
+$(function() {      
+      //Enable swiping...
+      $("body").swipe( {
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+          if (direction=="right") {
+          	$('a.fancybox-nav.fancybox-prev').click();
+          } else if (direction=="left") {$('a.fancybox-nav.fancybox-next').click();}
+           
+        },
+        //Default is 75px, set to 0 for demo so any distance triggers swipe
+         threshold:0
+      });
+    });
