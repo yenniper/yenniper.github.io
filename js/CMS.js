@@ -50,15 +50,25 @@
 	};
 
 //-------****** Fancy Box ******-------//
+function applePie() {
+    return ( navigator.userAgent.match(/(iPhone|iPod|iPad)/i) );
+}
 	$(document).ready(function() {
 		$(".fancybox")
     	.attr('rel', 'gallery')
     	.fancybox({
-    		 helpers: {
-          overlay: {
-              locked: true
-          }
-      },
+    		helpers: {
+          		overlay: {
+              	locked: true
+          		}
+      		},
+      		your: 'settings',
+    		afterShow: function() { 
+        			if ( applePie() ) { $('body').css({'position': 'fixed'}); } 
+    			},
+    		afterClose: function() {
+        			if ( applePie() ) { $('body').css({'position': ''}); }
+    			},
     		scrolling   : 'hidden',
 	        padding    : 0,
 	        margin     : 5,
