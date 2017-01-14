@@ -54,7 +54,11 @@
 		$(".fancybox")
     	.attr('rel', 'gallery')
     	.fancybox({
-
+    		 helpers: {
+          overlay: {
+              locked: true
+          }
+      },
     		scrolling   : 'no',
 	        padding    : 0,
 	        margin     : 5,
