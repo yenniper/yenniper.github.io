@@ -62,15 +62,15 @@
 			minHeight : 100,
 			maxWidth  : 9999,
 			maxHeight : 9999,
-			pixelRatio: 1, // Set to 2 for retina display support
+			pixelRatio: 2, // Set to 2 for retina display support
 
-			autoSize   : true,
+			autoSize   : false,
 			autoHeight : false,
 			autoWidth  : false,
 
-			autoResize  : true,
+			autoResize  : false,
 			autoCenter  : !isTouch,
-			fitToView   : true,
+			fitToView   : false,
 			aspectRatio : false,
 			topRatio    : 0.5,
 			leftRatio   : 0.5,
@@ -176,8 +176,8 @@
 
 			// Enable default helpers
 			helpers : {
-				overlay : true,
-				title   : true
+				overlay : false,
+				title   : false
 			},
 
 			// Callbacks
@@ -928,7 +928,7 @@
 		_error: function ( type ) {
 			$.extend(F.coming, {
 				type       : 'html',
-				autoWidth  : true,
+				autoWidth  : false,
 				autoHeight : true,
 				minWidth   : 0,
 				minHeight  : 0,
@@ -1179,7 +1179,7 @@
 				skin       = F.skin,
 				inner      = F.inner,
 				current    = F.current,
-				width      = current.width,
+				width      = 200px,
 				height     = current.height,
 				minWidth   = current.minWidth,
 				minHeight  = current.minHeight,
