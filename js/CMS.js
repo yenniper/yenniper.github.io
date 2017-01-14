@@ -59,7 +59,7 @@ function applePie() {
     	.fancybox({
     		helpers: {
           		overlay: {
-              	locked: false
+              	locked: true
           		}
       		},
       		your: 'settings',
