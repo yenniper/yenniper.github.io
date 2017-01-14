@@ -54,11 +54,8 @@
 		$(".fancybox")
     	.attr('rel', 'gallery')
     	.fancybox({
-    		scrolling   : 'hidden',
-    		helpers: {
-         overlay: {
-            locked: true 
-         },
+
+    		scrolling   : 'no',
 	        padding    : 0,
 	        margin     : 5,
 	        nextEffect : 'elastic',
