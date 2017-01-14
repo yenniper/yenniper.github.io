@@ -48,6 +48,7 @@
 		$(".vtines").append(image_test);
 	};
 	};
+
 //-------****** Fancy Box ******-------//
 	$(document).ready(function() {
 		$(".fancybox")

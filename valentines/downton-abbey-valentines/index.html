@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="/css/block.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="/js/CMS.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.js"></script>
 	<!-- Open Graph Proto -->
 	<meta property="og:url"           content="http://yenniper.com/downton-abbey-valentines/" />
 	<meta property="og:type"          content="article" />
@@ -20,11 +21,22 @@
 	
 </head>
 <body>
-	<a href="/"><img id="logo" class="center" src="/images/headertemplate2d.png"></a>
-
+	
+<div id="test">Swipe Here</div>
+	<script type="text/javascript">  $(function() {      
+      //Enable swiping...
+      $("#test").swipe( {
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+          $(this).text("You swiped " + direction +" "+ event+" "+distance+" "+fingerData);  
+        },
+        //Default is 75px, set to 0 for demo so any distance triggers swipe
+         threshold:0
+      });
+    });</script>
 	<h1>DOWNTON ABBEY VALENTINES</h1>
 	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-
+	
 	<div class="wrap">
 		<!-- Start CMS.js content block: Valentine Images -->
 			<div class="vtines"></div>
