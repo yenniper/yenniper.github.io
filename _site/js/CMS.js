@@ -59,7 +59,7 @@
               locked: true
           }
       },
-    		scrolling   : 'no',
+    		scrolling   : 'hidden',
 	        padding    : 0,
 	        margin     : 5,
 	        nextEffect : 'elastic',
