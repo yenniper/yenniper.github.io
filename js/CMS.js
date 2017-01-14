@@ -54,6 +54,7 @@
 		$(".fancybox")
     	.attr('rel', 'gallery')
     	.fancybox({
+    		scrolling   : 'hidden',
 	        padding    : 0,
 	        margin     : 5,
 	        nextEffect : 'elastic',
