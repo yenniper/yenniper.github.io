@@ -55,7 +55,7 @@
 }
 
 .fancybox-type-iframe .fancybox-inner {
-	-webkit-overflow-scrolling: touch;
+	-webkit-overflow-scrolling: hidden;
 }
 
 .fancybox-error {

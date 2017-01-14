@@ -70,7 +70,7 @@
                 		type    : 'html',
                 		width   : '95%',
                 		height  : '95%',
-                		content : '<div class="fancybox-image" style="background-image:url(' + this.href + '); background-size: contain; background-position:50% 50%;background-repeat:no-repeat;height:100%;width:100%;" /></div>'
+                		content : '<div class="fancybox-image" style="overflow:hidden; background-image:url(' + this.href + '); background-size: contain; background-position:50% 50%;background-repeat:no-repeat;height:100%;width:100%;" /></div>'
          });
        	 }
     });
