@@ -22,17 +22,15 @@
 </head>
 <body>
 	
-<div id="test">Swipe Here</div>
 	<script type="text/javascript">  $(function() {      
       //Enable swiping...
-      $(".fancybox_image").swipe( {
+      $("body").swipe( {
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-         if (direction=="right") {
-         	$('a.fancybox-nav.fancybox-next').click();
-         }else if (direction=="left") {
-         	$('a.fancybox-nav.fancybox-prev').click();
-         }  
+          if (direction=="right") {
+          	$(this).text("You swiped right"); 
+          } else if (direction=="left") {$(this).text("You swiped left")}
+           
         },
         //Default is 75px, set to 0 for demo so any distance triggers swipe
          threshold:0
