@@ -15,7 +15,11 @@
 	}
 	p{
 		margin: 50px 150px 50px 150px;
-		font-size: 12px;
+		font-size: 1.15em;
+	}
+	span.center{
+		font-size: 1.2em;
+		color:#666;
 	}
 
 	#logo{
