@@ -168,8 +168,8 @@
 /* Overlay helper */
 
 .fancybox-lock {
-    overflow: visible !important;
-    width: auto;
+/*    overflow: visible !important;
+*/    width: auto;
 }
 
 .fancybox-lock body {
