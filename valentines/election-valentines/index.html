@@ -14,7 +14,7 @@
 	<meta property="og:type"          content="article" />
 	<meta property="og:title"         content="2016 Election Valentines" />
 	<meta property="og:description"   content="This is my 7th year designing valentines! Which means I have one more year before I'm kicked out of valentine office and someone else takes over. This year an obvious theme emerged, (even though it's a slight detour from the usjh valentines of entertainment's past). And since it's the first day of February the day of the Iowa Caucus(es) (Cauci?), I proudly present to my fellow citizens your 2016 Presidential Valentines!"/>
-	<meta property="og:image"         content="http://yenniper.com/images/valentines/election-valentines/election-valentine3.jpg" />
+	<meta property="og:image"         content="http://yenniper.com/images/valentines/election-valentines/election-valentine_fb.jpg" />
 
 	<!-- Fancy Box -->
 	<script type="text/javascript" src="/fancyBox-master/source/jquery.fancybox.pack.js?v=2.1.5"></script>
@@ -22,42 +22,23 @@
 	
 </head>
 <body>
+<!-- Facebook App SDK Call -->
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '607380329461737',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-    FB.AppEvents.logPageView();
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+	window.fbAsyncInit=function(){FB.init({appId:"607380329461737",xfbml:!0,version:"v2.8"}),FB.AppEvents.logPageView()},function(a,b,c){var d,e=a.getElementsByTagName(b)[0];a.getElementById(c)||(d=a.createElement(b),d.id=c,d.src="//connect.facebook.net/en_US/sdk.js",e.parentNode.insertBefore(d,e))}(document,"script","facebook-jssdk");
 </script>
-
+<!-- Logo -->
 	<div class="header"></div>
 	<script>$(".header").append(header);</script>
 
 
 
 	<h1>2016 ELECTION VALENTINES</h1>
-	
-  	<a href=""><div id="fb" class="share"><img src="/images/share-icons/fb.jpg" alt=""></div></a>
-  	<script>
-  		$( "#fb" ).click(function() {
-  		FB.ui({
-  		method: 'share',
-  		href: url,
-		}, function(response){});
-		});
-	</script>
+	<!-- Share Nav -->
+  	<div id="fb" class="share"><img src="/images/share-icons/fb.jpg" alt=""></div>
+  	<script>$("#fb").click(function(){FB.ui({method:"share",href:url},function(a){})});</script>
+  	<!-- Intro Text -->
 	<p>This is my 7th year designing valentines! Which means I have one more year before I'm kicked out of valentine office and someone else takes over. This year an obvious theme emerged, (even though it's a slight detour from the usjh valentines of entertainment's past). And since it's the first day of February <i>AND</i> the day of the Iowa Caucus(es) (Cauci?), I proudly present to my fellow citizens your 2016 Presidential Valentines! </p>
+<!-- Start Valentine Content -->
 	<div class="wrap">
 		<!-- Start CMS.js content block: Valentine Images -->
 			<div class="vtines"></div>
@@ -66,7 +47,7 @@
 	</div>
 
 	<div class="printable">
-		<h2>PRINTABLES</h2>
+		<h2>FREE PRINTABLE</h2>
 		<a href="/images/valentines/election-valentines/election-valentine_printable.pdf" target="blank">
 			<img src="/images/valentines/election-valentines/election-valentines_printable.jpg" alt="2016 Election Valentine Printables">
 		</a>
@@ -75,6 +56,6 @@
 	<div class="valentines_foot"></div>
 	<script>$(".valentines_foot").append(valentines_foot);</script>
 	<!-- End CMS.js content block: Valentines Foot -->
-
+<!-- End Valentine Content -->
 </body>
 </html>

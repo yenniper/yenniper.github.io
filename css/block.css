@@ -22,18 +22,20 @@
 		font-size: 1.2em;
 		color:#666;
 	}
-
 	#logo{
 		/*height:200px;*/
 	}
+	.share{
+		cursor: pointer;
+	}
 	.center {
-	display:block;
-	margin: 0px auto;
+		display:block;
+		margin: 0px auto;
 	}
 	.thumb {
-	display:inline-block;
-	margin: 5px;
-	max-width: 200%;
+		display:inline-block;
+		margin: 5px;
+		max-width: 200%;
 	}
 	@media only screen and (min-device-width : 280px) and (max-device-width : 600px) {
 		.thumb.vtine { display:block;
@@ -43,21 +45,21 @@
 	}
 
 	.wrap {
-    margin: 0 auto;
-    display: inline-block;
-    overflow: hidden;
+	    margin: 0 auto;
+	    display: inline-block;
+	    overflow: hidden;
 	}
 	.foot {
-	background-color: #efefef;
-	padding:15px;
+		background-color: #efefef;
+		padding:15px;
 	}
 
 	.fade {
-   opacity: 1;
-   transition: opacity .25s ease-in-out;
-   -moz-transition: opacity .25s ease-in-out;
-   -webkit-transition: opacity .25s ease-in-out;
+	   opacity: 1;
+	   transition: opacity .25s ease-in-out;
+	   -moz-transition: opacity .25s ease-in-out;
+	   -webkit-transition: opacity .25s ease-in-out;
    }
 	.fade:hover {
-	 opacity: 0.8;
+	 	opacity: 0.8;
 	 }
