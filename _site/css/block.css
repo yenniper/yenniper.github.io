@@ -27,6 +27,8 @@
 	}
 	.share{
 		cursor: pointer;
+		display:inline-block;
+		margin:1px;
 	}
 	.center {
 		display:block;
