@@ -65,8 +65,9 @@
 				margin: 5px;
 				width: 800px;
 				}
-		.share{
-				width:200%;
+		.share > a > img, .share > img{
+				width:125px;
+				margin:20px;
 		}
 	}
 
