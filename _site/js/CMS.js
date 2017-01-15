@@ -19,6 +19,9 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 			img:"TSwift",
 			name:"Taylor Swift"
 		},{
+			img:"hunger-games",
+			name:"Hunger Games"
+		},{
 			img:"election",
 			name:"2016 Election"
 		}];
