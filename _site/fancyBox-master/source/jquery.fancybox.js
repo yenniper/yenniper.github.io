@@ -1179,7 +1179,7 @@
 				skin       = F.skin,
 				inner      = F.inner,
 				current    = F.current,
-				width      = 200px,
+				width      = current.width,
 				height     = current.height,
 				minWidth   = current.minWidth,
 				minHeight  = current.minHeight,
