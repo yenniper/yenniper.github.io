@@ -15,10 +15,25 @@
 	color: #999;
 	}
 	p{
-		margin: 50px 150px 50px 150px;
+		margin: 50px auto;
 		font-size: 1.15em;
 		text-align: left;
+		width:890px;
 	}
+	.printable > a > img{
+		width:890px;
+	}
+	@media (max-width: 901px) { 
+
+	p{
+		width:450px;
+	}
+	.printable > a > img{
+		width:450px;
+	}
+
+	 }
+
 	span.center{
 		font-size: 1.2em;
 		color:#666;
@@ -37,10 +52,15 @@
 	}
 	.thumb {
 		display:inline-block;
-		margin: 5px;
+		margin: 10px;
 		max-width: 200%;
 	}
+	.vtine{
+		width:431px;
+
+	}
 	@media only screen and (min-device-width : 280px) and (max-device-width : 600px) {
+
 		.thumb.vtine { display:block;
 				margin: 5px;
 				width: 800px;
