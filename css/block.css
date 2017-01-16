@@ -3,22 +3,38 @@
 		min-width: 810px;
 		max-width: 1200px;
 		margin: 0px auto;
-		font-family: 'Playfair Display', serif;
+		font-family: 'EB Garamond', serif;
 		color: #999;
+	}
+	h1{
+		font-size: 15px;
+		margin-bottom: 15px;
 	}
 
 	h1,h2,h3,h4{
-		font-family: 'Raleway', sans-serif;
+		font-size: 15px;
+		font-family: Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+		letter-spacing: 3px;
+		font-weight: normal;
+	}
+	h2,h3,h4{
+		margin: 50px auto;
 	}
 	a {
 	text-decoration: none;
 	color: #999;
 	}
 	p{
-		margin: 50px auto;
-		font-size: 1.15em;
+		margin: 15px auto;
+		font-size: 1em;
 		text-align: left;
-		width:890px;
+		width:825px;
+	}
+	.rule{
+		height: 1px;
+    	background: #c1c1c1;
+    	margin: 25px auto 0 auto;
+    	width: 825px;
 	}
 	.printable > a > img{
 		width:890px;
@@ -29,6 +45,9 @@
 		width:450px;
 	}
 	.printable > a > img{
+		width:450px;
+	}
+	.rule{
 		width:450px;
 	}
 
@@ -77,8 +96,8 @@
 	    overflow: hidden;
 	}
 	.foot {
-		background-color: #efefef;
-		padding:15px;
+/*		background-color: #efefef;
+*/		padding:15px;
 	}
 
 	.fade {
