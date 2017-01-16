@@ -99,6 +99,12 @@
 /*		background-color: #efefef;
 */		/*padding:15px;*/
 	}
+	.footer{
+		margin-top: 25px;
+    	text-align: center;
+/*    	background: #eaeaea;
+*/    	padding: 25px;
+	}
 
 	.fade {
 	   opacity: 1;
