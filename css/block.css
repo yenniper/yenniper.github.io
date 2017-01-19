@@ -8,7 +8,7 @@
 		background-color: #F7F1F1;
 	}
 	h1,h3{
-		font-size: 2em;
+		font-size: 3em;
 	    font-family: 'EB Garamond', serif;
 	    letter-spacing: 2px;
 	    font-style: normal;
@@ -20,7 +20,7 @@
 		font-family: 'Work Sans', sans-serif;
 	    letter-spacing: 2px;
 	    font-weight: 500;
-	    font-size: 1.3em;
+	    font-size: 1.5em;
 	    margin-top: 67px;
 	    margin-bottom: 0px;
 	    text-transform: uppercase;
@@ -42,7 +42,7 @@
 		background-color: #fff;
 	}
 	.banner{
-		 height: 45px;
+		 height: 30px;
     	background-color: #ffd1c2;
 	}
 	.rule{
@@ -97,13 +97,12 @@
 	}
 	@media only screen and (min-device-width : 280px) and (max-device-width : 600px) {
 
-		.thumb.vtine { display:block;
+		.thumb.vtine { 
 				margin: 5px;
 				width: 800px;
 				}
 		.share > a > img, .share > img{
-				width:50px;
-				margin:20px;
+				width:65px;
 		}
 
 		}
