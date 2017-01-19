@@ -9,24 +9,25 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 		},{
 			img:"downton-abbey",
 			name:"Downton Abbey"
-		},{
-			img:"lost",
-			name:"Lost"
-		},{
+			},{
 			img:"harry-potter",
 			name:"Harry Potter"
-		},{
-			img:"TSwift",
-			name:"Taylor Swift"
-		},{
+			},{
 			img:"hunger-games",
 			name:"Hunger Games"
 		},{
+			img:"lost",
+			name:"Lost"
+				},{
 			img:"election",
 			name:"Presidential Election"
-			},{
-			img:"stranger-things",
-			name:"Stranger Things"
+			// },{
+			// img:"stranger-things",
+			// name:"Stranger Things"
+		},{
+			img:"TSwift",
+			name:"Taylor Swift"
+			
 		}];
 	//Setup footObject
 	var footObject = [];
