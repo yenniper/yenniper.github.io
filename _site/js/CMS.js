@@ -24,6 +24,9 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 		},{
 			img:"election",
 			name:"Presidential Election"
+			},{
+			img:"stranger-things",
+			name:"Stranger Things"
 		}];
 	//Setup footObject
 	var footObject = [];
