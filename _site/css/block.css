@@ -62,6 +62,9 @@
 	.printable > a > img{
 		width:450px;
 	}
+	.rule{
+			width:431px;
+		}
 
 	 }
 
@@ -100,6 +103,8 @@
 		.share > a > img, .share > img{
 				width:125px;
 				margin:20px;
+		}
+
 		}
 	}
 
