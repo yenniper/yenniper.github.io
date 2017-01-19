@@ -4,25 +4,33 @@
 		max-width: 1200px;
 		margin: 0px auto;
 		font-family: 'EB Garamond', serif;
-		color: #999;
+		color: #3c5162;
+		background-color: #F7F1F1;
 	}
-	h1{
-		font-size: 15px;
-		margin-bottom: 15px;
+	h1,h3{
+		font-size: 2em;
+	    font-family: 'EB Garamond', serif;
+	    letter-spacing: 2px;
+	    font-style: normal;
+	    font-weight: normal;
+	    margin-bottom: 37px
 	}
 
-	h1,h2,h3,h4{
-		font-size: 15px;
-		font-family: Arial, Tahoma, Helvetica, FreeSans, sans-serif;
-		letter-spacing: 3px;
-		font-weight: normal;
+	h2,h4{
+		font-family: 'Work Sans', sans-serif;
+	    letter-spacing: 2px;
+	    font-weight: 500;
+	    font-size: 1.3em;
+	    margin-top: 67px;
+	    margin-bottom: 0px;
+	    text-transform: uppercase;
 	}
-	h2,h3,h4{
+	h2{
 		margin: 50px auto;
 	}
 	a {
 	text-decoration: none;
-	color: #999;
+	color: #3c5162;
 	}
 	p{
 		margin: 15px auto;
@@ -30,11 +38,18 @@
 		text-align: left;
 		width:825px;
 	}
+	.content{
+		background-color: #fff;
+	}
+	.banner{
+		 height: 45px;
+    	background-color: #ffd1c2;
+	}
 	.rule{
-		height: 1px;
-    	background: #c1c1c1;
+		height:1px;
+    	background: #FFD1C3;
     	margin: 25px auto 0 auto;
-    	width: 825px;
+    	width: 655px;
 	}
 	.printable > a > img{
 		width:890px;
@@ -47,9 +62,6 @@
 	.printable > a > img{
 		width:450px;
 	}
-	.rule{
-		width:450px;
-	}
 
 	 }
 
@@ -58,7 +70,8 @@
 		color:#666;
 	}
 	#logo{
-		/*height:200px;*/
+		margin-top: 87px;
+    	margin-bottom: 67px;
 	}
 	.share{
 		cursor: pointer;
@@ -100,10 +113,10 @@
 */		/*padding:15px;*/
 	}
 	.footer{
-		margin-top: 25px;
     	text-align: center;
-/*    	background: #eaeaea;
-*/    	padding: 25px;
+    	color:#adabac;
+    	padding: 25px;
+    	font-size: 1.5em;
 	}
 
 	.fade {
@@ -113,5 +126,5 @@
 	   -webkit-transition: opacity .25s ease-in-out;
    }
 	.fade:hover {
-	 	opacity: 0.8;
+	 	color:#adabac;
 	 }

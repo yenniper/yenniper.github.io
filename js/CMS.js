@@ -5,7 +5,7 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 //-------****** Valentines Foot ******-------//
 	var valentines_foot="";
 	var pre_footObject = [{
-			h2:"MORE VALENTINES"
+			h2:"MORE VALENTINES:"
 		},{
 			img:"downton-abbey",
 			name:"Downton Abbey"
@@ -24,6 +24,9 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 		},{
 			img:"election",
 			name:"2016 Election"
+			},{
+			img:"stranger-things",
+			name:"Stranger Things"
 		}];
 	//Setup footObject
 	var footObject = [];
@@ -40,10 +43,10 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 	 };
 	//Build HTML Object from footObject data --> store in valentines_foot var
 	var h2="<h2>"+footObject[0].h2+"</h2>"
-	var valentines_foot=h2+'<div class="foot">';
+	var valentines_foot=h2+'<div class="rule"></div>';
 	 for (var i = 1; i <= footObject.length-1; i++) {
-		valentines_foot+='<a class="fade" href="/valentines/'+footObject[i].img+'-valentines/"><div class="wrap '+footObject[i].img+'"><img class="thumb" src="/images/valentines/'+footObject[i].img+'-valentine.jpg" alt="'+footObject[i].name+'"><span class="center">'+footObject[i].name+'</span></div></a>';
-	 }valentines_foot+="</div>";
+		valentines_foot+='<a class="fade" href="/valentines/'+footObject[i].img+'-valentines/"><h3>'+footObject[i].name+'</h3></a><div class="rule"></div>';
+	 };
 
 //-------****** Valentine Images ******-------//
 	function imagePop(image_name,image_number) {
