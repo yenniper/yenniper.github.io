@@ -23,10 +23,7 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 			name:"Hunger Games"
 		},{
 			img:"election",
-			name:"2016 Election"
-			},{
-			img:"stranger-things",
-			name:"Stranger Things"
+			name:"Presidential Election"
 		}];
 	//Setup footObject
 	var footObject = [];
@@ -125,7 +122,7 @@ $(function() {
 var social="";
 social += "<div class=\"wrap\">";
 social += "  	<div id=\"fb\" class=\"share\"><img src=\"\/images\/share-icons\/fb.jpg\" alt=\"\"><\/div>";
-social += "  	<div id=\"fb\" class=\"share\"><a href=\"https:\/\/twitter.com\/intent\/tweet?text=Spread%20the%20love%20with%202016%20Election%20Valentines!%20trose.co\/2jyFyp4%20@YenniperBlog\" target=\"blank\"><img src=\"\/images\/share-icons\/twitter.jpg\" alt=\"\"><\/a><\/div>";
+social += "  	<div id=\"fb\" class=\"share\"><a href=\"https:\/\/twitter.com\/intent\/tweet?text="+url+"%20@YenniperBlog\" target=\"blank\"><img src=\"\/images\/share-icons\/twitter.jpg\" alt=\"\"><\/a><\/div>";
 social += "  	<div id=\"fb\" class=\"share\"><a data-pin-do=\"buttonBookmark\" data-pin-custom=\"true\" data-pin-save=\"false\" href=\"https:\/\/www.pinterest.com\/pin\/create\/button\/\"><img src=\"http:\/\/yenniper.com\/images\/share-icons\/pinterest.jpg\"\/><\/a><\/div>";
 social += "  	<script>$(\"#fb\").click(function(){FB.ui({method:\"share\",href:url},function(a){})});<\/script>";
 social += "  	<\/div>";
