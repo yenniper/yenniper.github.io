@@ -102,7 +102,7 @@ function applePie() {
 
 $(function() {      
       //Enable swiping...
-      $(".fancybox-overlay").swipe( {
+      $("body").swipe( {
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
           if (direction=="right") {
