@@ -1,6 +1,6 @@
 //-------****** Header ******-------//
 
-var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/images/headertemplate2d.png"></a>';
+var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/images/yenniper.svg"></a>';
 
 //-------****** Valentines Foot ******-------//
 	var valentines_foot="";
@@ -44,9 +44,9 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 	 };
 	//Build HTML Object from footObject data --> store in valentines_foot var
 	var h2="<h2>"+footObject[0].h2+"</h2>"
-	var valentines_foot=h2+'<div class="rule"></div>';
+	var valentines_foot=h2+'<div class="rule2"></div>';
 	 for (var i = 1; i <= footObject.length-1; i++) {
-		valentines_foot+='<a class="fade" href="/valentines/'+footObject[i].img+'-valentines/"><h3>'+footObject[i].name+'</h3></a><div class="rule"></div>';
+		valentines_foot+='<a class="fade" href="/valentines/'+footObject[i].img+'-valentines/"><h3>'+footObject[i].name+'</h3></a><div class="rule2"></div>';
 	 };
 
 //-------****** Valentine Images ******-------//
@@ -125,9 +125,9 @@ $(function() {
 //-------****** Social Nav ******-------//
 var social="";
 social += "<div class=\"wrap\">";
-social += "  	<div id=\"fb\" class=\"share\"><img src=\"\/images\/share-icons\/fb.jpg\" alt=\"\"><\/div>";
-social += "  	<div id=\"fb\" class=\"share\"><a href=\"https:\/\/twitter.com\/intent\/tweet?text="+url+"%20@YenniperBlog\" target=\"blank\"><img src=\"\/images\/share-icons\/twitter.jpg\" alt=\"\"><\/a><\/div>";
-social += "  	<div id=\"fb\" class=\"share\"><a data-pin-do=\"buttonBookmark\" data-pin-custom=\"true\" data-pin-save=\"false\" href=\"https:\/\/www.pinterest.com\/pin\/create\/button\/\"><img src=\"http:\/\/yenniper.com\/images\/share-icons\/pinterest.jpg\"\/><\/a><\/div>";
+social += "  	<div id=\"fb\" class=\"share\"><img src=\"\/images\/share-icons\/fb.svg\" alt=\"\"><\/div>";
+social += "  	<div id=\"fb\" class=\"share\"><a href=\"https:\/\/twitter.com\/intent\/tweet?text="+url+"%20@YenniperBlog\" target=\"blank\"><img src=\"\/images\/share-icons\/twitter.svg\" alt=\"\"><\/a><\/div>";
+social += "  	<div id=\"fb\" class=\"share\"><a data-pin-do=\"buttonBookmark\" data-pin-custom=\"true\" data-pin-save=\"false\" href=\"https:\/\/www.pinterest.com\/pin\/create\/button\/\"><img src=\"http:\/\/yenniper.com\/images\/share-icons\/pinterest.svg\"\/><\/a><\/div>";
 social += "  	<script>$(\"#fb\").click(function(){FB.ui({method:\"share\",href:url},function(a){})});<\/script>";
 social += "  	<\/div>";
 
