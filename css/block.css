@@ -15,21 +15,20 @@
 	    font-weight: normal;
 	    margin-bottom: 37px
 	}
-	h3,h4{
+	h3{
 		font-size: 1.1em;
 	    font-family: 'EB Garamond', serif;
 	    letter-spacing: 2px;
 	    font-style: normal;
 	    font-weight: normal;
 	}
-	h2{
-		font-family: 'Work Sans', sans-serif;
+	h2,h4{
+		font-family: 'EB Garamond', serif;
 	    letter-spacing: 2px;
 	    font-weight: 300;
 	    font-size: 1.1em;
 	    margin-top: 67px;
 	    margin-bottom: 0px;
-	    text-transform: uppercase;
 	}
 	h2{
 		margin: 50px auto;
@@ -117,14 +116,13 @@
 				.share > a > img, .share > img{
 						width:65px;
 						}
-				h2{
-				font-family: 'Work Sans', sans-serif;
+				h2,h4{
+				font-family: 'EB Garamond', serif;
 			    letter-spacing: 2px;
 			    font-weight: 300;
 			    font-size: 2em;
 			    margin-top: 67px;
 			    margin-bottom: 0px;
-			    text-transform: uppercase;
 					}
 				h2{
 				margin: 50px auto;
@@ -137,7 +135,7 @@
 				height:2px;
 		    	width: 655px;
 					}
-				h3,h1,h4{
+				h3,h1{
 					font-size: 2em;
 				}
 				#logo{

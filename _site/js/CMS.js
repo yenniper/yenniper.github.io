@@ -5,7 +5,7 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 //-------****** Valentines Foot ******-------//
 	var valentines_foot="";
 	var pre_footObject = [{
-			h2:"MORE VALENTINES:"
+			h2:"More Valentines:"
 		},{
 			img:"downton-abbey",
 			name:"Downton Abbey"
