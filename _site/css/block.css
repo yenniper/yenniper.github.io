@@ -25,7 +25,7 @@
 	h2,h4{
 		font-family: 'Work Sans', sans-serif;
 	    letter-spacing: 2px;
-	    font-weight: 500;
+	    font-weight: 300;
 	    font-size: 1.1em;
 	    margin-top: 67px;
 	    margin-bottom: 0px;
@@ -43,6 +43,13 @@
 		font-size: 1em;
 		text-align: left;
 		width:825px;
+	}
+	.footer{
+	text-align: center;
+	color:#adabac;
+	padding: 25px;
+	font-size: 1.1em;
+	margin:35px;
 	}
 	.content{
 		background-color: #fff;
@@ -64,76 +71,83 @@
     	width: 400px;
 	}
 	@media (max-width: 901px) { 
+		p{
+			width:450px;
+		}
+		.rule{
+				width:431px;
+			}
 
-	p{
-		width:450px;
-	}
-	.rule{
+		 }
+
+		span.center{
+			font-size: 1.2em;
+			color:#666;
+		}
+		#logo{
+			margin-top: 44px;
+	    	margin-bottom: 48px;
+	    	height: 30px;
+		}
+		.share{
+			width:50px;
+			cursor: pointer;
+			display:inline-block;
+			margin:0px 15px 35px 15px;
+		}
+		.center {
+			display:block;
+			margin: 0px auto;
+		}
+		.thumb {
+			display:inline-block;
+			margin: 10px;
+			max-width: 200%;
+		}
+		.vtine{
 			width:431px;
+
 		}
+		@media only screen and (min-device-width : 280px) and (max-device-width : 600px) {
 
-	 }
-
-	span.center{
-		font-size: 1.2em;
-		color:#666;
-	}
-	#logo{
-		margin-top: 87px;
-    	margin-bottom: 67px;
-    	height: 30px;
-	}
-	.share{
-		width:50px;
-		cursor: pointer;
-		display:inline-block;
-		margin:0px 15px 35px 15px;
-	}
-	.center {
-		display:block;
-		margin: 0px auto;
-	}
-	.thumb {
-		display:inline-block;
-		margin: 10px;
-		max-width: 200%;
-	}
-	.vtine{
-		width:431px;
-
-	}
-	@media only screen and (min-device-width : 280px) and (max-device-width : 600px) {
-
-		.thumb.vtine { 
-				margin: 5px;
-				width: 800px;
+				.thumb.vtine { 
+						margin: 5px;
+						width: 800px;
+						}
+				.share > a > img, .share > img{
+						width:65px;
+						}
+				h2,h4{
+				font-family: 'Work Sans', sans-serif;
+			    letter-spacing: 2px;
+			    font-weight: 300;
+			    font-size: 2em;
+			    margin-top: 67px;
+			    margin-bottom: 0px;
+			    text-transform: uppercase;
+					}
+				h2{
+				margin: 50px auto;
+					}
+				.rule {
+				height:2px;
+		    	width: 655px;
+					}
+				.rule2{
+				height:2px;
+		    	width: 655px;
+					}
+				h3,h1{
+					font-size: 2em;
 				}
-		.share > a > img, .share > img{
-				width:65px;
+				#logo{
+					height:91px;
+					margin-top: 87px;
+		    		margin-bottom: 67px;
 				}
-		h2,h4{
-		font-family: 'Work Sans', sans-serif;
-	    letter-spacing: 2px;
-	    font-weight: 500;
-	    font-size: 2em;
-	    margin-top: 67px;
-	    margin-bottom: 0px;
-	    text-transform: uppercase;
-			}
-		h2{
-		margin: 50px auto;
-			}
-		.rule {
-		height:2px;
-    	width: 655px;
-			}
-		.rule2{
-		height:2px;
-    	width: 655px;
-			}
-		h3,h1{
-			font-size: 2em;
-		}
+				.footer{
+					font-size: 1.5em;
+					}
 		}
 	}
 	.wrap {
@@ -145,13 +159,7 @@
 /*		background-color: #efefef;
 */		/*padding:15px;*/
 	}
-	.footer{
-    	text-align: center;
-    	color:#adabac;
-    	padding: 25px;
-    	font-size: 1.1em;
-    	margin:35px;
-	}
+
 
 	.fade {
 	   opacity: 1;
