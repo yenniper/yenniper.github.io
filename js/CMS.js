@@ -21,9 +21,9 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 				},{
 			img:"election",
 			name:"Presidential Election"
-			// },{
-			// img:"stranger-things",
-			// name:"Stranger Things"
+			 },{
+			 img:"stranger-things",
+			 name:"Stranger Things"
 		},{
 			img:"TSwift",
 			name:"Taylor Swift"
