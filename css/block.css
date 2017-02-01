@@ -23,7 +23,6 @@
 	    font-weight: normal;
 	}
 	h2,h4{
-		font-family: 'EB Garamond', serif;
 	    letter-spacing: 2px;
 	    font-weight: 300;
 	    font-size: 1.1em;
@@ -32,7 +31,10 @@
 	}
 	h2{
 		margin: 50px auto;
+		font-family: 'EB Garamond', serif;
 	}
+	h4{
+	font-family: 'EB Garamond', serif;}
 	a {
 	text-decoration: none;
 	color: #3c5162;
