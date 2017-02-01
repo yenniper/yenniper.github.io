@@ -126,8 +126,8 @@ $(function() {
 var social="";
 social += "<div class=\"wrap\">";
 social += "  	<div id=\"fb\" class=\"share\"><img src=\"\/images\/share-icons\/fb.svg\" alt=\"\"><\/div>";
-social += "  	<div id=\"fb\" class=\"share\"><a href=\"https:\/\/twitter.com\/intent\/tweet?text="+url+"%20@YenniperBlog\" target=\"blank\"><img src=\"\/images\/share-icons\/twitter.svg\" alt=\"\"><\/a><\/div>";
-social += "  	<div id=\"fb\" class=\"share\"><a data-pin-do=\"buttonBookmark\" data-pin-custom=\"true\" data-pin-save=\"false\" href=\"https:\/\/www.pinterest.com\/pin\/create\/button\/\"><img src=\"http:\/\/yenniper.com\/images\/share-icons\/pinterest.svg\"\/><\/a><\/div>";
+social += "  	<div  class=\"share\"><a href=\"https:\/\/twitter.com\/intent\/tweet?text="+url+"%20@YenniperBlog\" target=\"blank\"><img src=\"\/images\/share-icons\/twitter.svg\" alt=\"\"><\/a><\/div>";
+social += "  	<div  class=\"share\"><a data-pin-do=\"buttonBookmark\" data-pin-custom=\"true\" data-pin-save=\"false\" href=\"https:\/\/www.pinterest.com\/pin\/create\/button\/\"><img src=\"http:\/\/yenniper.com\/images\/share-icons\/pinterest.svg\"\/><\/a><\/div>";
 social += "  	<script>$(\"#fb\").click(function(){FB.ui({method:\"share\",href:url},function(a){})});<\/script>";
 social += "  	<\/div>";
 
