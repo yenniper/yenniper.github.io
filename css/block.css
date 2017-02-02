@@ -123,15 +123,18 @@
 						width:65px;
 						}
 				h2,h4{
-				font-family: 'EB Garamond', serif;
+				
 			    letter-spacing: 2px;
 			    font-weight: 300;
 			    font-size: 2em;
 			    margin-top: 67px;
 			    margin-bottom: 0px;
 					}
+			h4{font-family: 'EB Garamond', serif;}
 				h2{
 				margin: 50px auto;
+				font-family: 'Work Sans', sans-serif;
+
 					}
 				.rule {
 				height:2px;
