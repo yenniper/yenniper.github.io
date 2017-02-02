@@ -100,20 +100,20 @@ function applePie() {
 		});
 //-------****** Swipe to Change ******-------//
 
-$(function() {      
-      //Enable swiping...
-      $("body").swipe( {
-        //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-          if (direction=="right") {
-          	$('a.fancybox-nav.fancybox-prev').click();
-          } else if (direction=="left") {$('a.fancybox-nav.fancybox-next').click();}
+// $(function() {      
+//       //Enable swiping...
+//       $("body").swipe( {
+//         //Generic swipe handler for all directions
+//         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+//           if (direction=="right") {
+//           	$('a.fancybox-nav.fancybox-prev').click();
+//           } else if (direction=="left") {$('a.fancybox-nav.fancybox-next').click();}
            
-        },
-        //Default is 75px, set to 0 for demo so any distance triggers swipe
-         threshold:2
-      });
-    });
+//         },
+//         //Default is 75px, set to 0 for demo so any distance triggers swipe
+//          threshold:2
+//       });
+//     });
 //-------****** Analytics.js ******-------//
 !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
   analytics.load("IXiZx2DoiLFspO9g6QGJcOSonpDR2E7W");
