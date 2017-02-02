@@ -126,15 +126,18 @@
 				
 			    letter-spacing: 2px;
 			    font-weight: 300;
-			    font-size: 2em;
+			    
 			    margin-top: 67px;
 			    margin-bottom: 0px;
 					}
-			h4{font-family: 'EB Garamond', serif;}
+			h4{
+			     font-family: 'EB Garamond', serif;
+			     font-size: 2em;
+			}
 				h2{
 				margin: 50px auto;
 				font-family: 'Work Sans', sans-serif;
-
+				font-size:1em;
 					}
 				.rule {
 				height:2px;
