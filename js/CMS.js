@@ -28,6 +28,10 @@ var header = '<a href="/"><img alt="yenniper" id="logo" class="center" src="/ima
 			img:"TSwift",
 			name:"Taylor Swift"
 			
+		},
+		{
+			img:"star-wars",
+			name:"Star Wars: The Last Jedi"
 		}];
 	//Setup footObject
 	var footObject = [];
